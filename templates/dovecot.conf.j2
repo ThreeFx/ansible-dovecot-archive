@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+protocols = imap
+
+ssl = required
+ssl_cert = <{{ dovecot_ssl_cert }}
+ssl_key = <{{ dovecot_ssl_key }}
+
+mail_location = mdbox:/var/lib/vmail/mdbox
+
+auth_mechanisms = plain
+
+passdb {
+    driver = passwd-file
+    args = /etc/dovecot/passwd
+}
+
+userdb {
+    driver = static
+    args = uid=vmail gid=vmail
+}

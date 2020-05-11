@@ -1,0 +1,6 @@
+---
+dovecot_ssl_cert: changeme
+dovecot_ssl_key: changeme
+
+dovecot_user: changeme
+dovecot_password: changeme

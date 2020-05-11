@@ -1,0 +1,7 @@
+---
+- name: restart dovecot
+  become: True
+  systemd:
+    name: dovecot
+    state: restarted
+    enabled: yes

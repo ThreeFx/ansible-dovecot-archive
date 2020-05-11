@@ -1,0 +1,33 @@
+---
+- name: Install dovecot-imapd
+  become: True
+  apt:
+    name: dovecot-imapd
+
+- name: Create vmail user
+  become: True
+  user:
+    name: vmail
+    home: /var/lib/vmail
+    shell: /bin/false
+    system: True
+
+- name: Configure dovecot
+  become: True
+  template:
+    src: dovecot.conf.j2
+    dest: /etc/dovecot/dovecot.conf
+    owner: dovecot
+    group: dovecot
+    mode: 0644
+  notify: restart dovecot
+
+- name: Configure dovecot users
+  become: True
+  template:
+    src: passwd.j2
+    dest: /etc/dovecot/passwd
+    owner: dovecot
+    group: dovecot
+    mode: 0640
+  notify: restart dovecot
